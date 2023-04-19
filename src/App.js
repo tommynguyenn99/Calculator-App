@@ -9,7 +9,7 @@ function Calculator() {
   return (
     <div className="calculator">
       {calculatorButtons.map((button) => (
-        <button key= {button.value}>{button.text}</button>
+        <button className="buttons" key= {button.value}>{button.text}</button>
       ))}
     </div>
   );
