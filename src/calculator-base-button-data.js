@@ -6,7 +6,7 @@ export const calculatorButtons = [
         value: 'All Clear'
     },
     {
-        type: 'clear',
+        type: 'delete',
         className: 'c',
         text: 'C',
         value: 'Clear'
