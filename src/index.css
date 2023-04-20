@@ -7,20 +7,37 @@
 .calculator {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   width: 30%;
   margin: 0 auto;
+  grid-gap: 0.1rem;
+}
+
+/* Calculator Container Style  */
+.calculator {
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 1.5rem;
 }
 
 /* Calc Buttons  */
 .calculator button {
-  width: 5rem;
+  width: 4rem;
   height: 4rem;
   margin: 0.315rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
 }
 
-button.equal {
-  grid-row: auto / span 2;
+/* .buttons .zero {
+  grid-row: 5 / span 2;
+} */
+
+.display {
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
 }
 
 /* Footer  */
