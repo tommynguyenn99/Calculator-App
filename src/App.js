@@ -4,6 +4,7 @@ import Header from "./Header";
 import Display from  './Display';
 import Button from "./Button";
 import { calculatorButtons } from "./calculator-base-button-data.js";
+
 import Footer from "./Footer";
 
 
@@ -28,6 +29,9 @@ function App() {
           break;
       case 'delete':
         processDeleteType(); 
+        break; 
+      case 'enter': 
+        processEqualType(); 
         break; 
     }
   }
@@ -54,6 +58,12 @@ function App() {
     setCalcString(calcData.slice(0, -1));
   }
 
+  // Equal 
+  function processEqualType() {
+    const result = eval(calcData);
+    setDisplay(result.toString()); 
+    setCalcString(result.toString());
+  }
 
   function Calculator() {
     return (
