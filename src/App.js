@@ -23,6 +23,9 @@ function App() {
       case 'operator':
         processOperatorType(btnValue, btnText)
         break;
+        case 'clear':
+          processClearType();
+          break;
     }
   }
 
@@ -36,12 +39,19 @@ function App() {
     setCalcString(`${calcData} ${dataText} `);
   }
 
+  function processClearType(){
+    setDisplay('');
+    setCalcString('');
+  }
 
 
   function Calculator() {
     return (
       <div className="calculator">
+        <div className="display-row">
       <Display digits={display}/>
+      </div>
+      <div className="button-row">
         {calculatorButtons.map((button) => (
           <Button
             className="buttons"
@@ -52,6 +62,7 @@ function App() {
             handleBtnClick={handleBtnClick}
           />
         ))}
+        </div>
       </div>
     );
   }
