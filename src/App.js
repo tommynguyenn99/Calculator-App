@@ -26,6 +26,9 @@ function App() {
         case 'clear':
           processClearType();
           break;
+      case 'delete':
+        processDeleteType(); 
+        break; 
     }
   }
 
@@ -39,9 +42,16 @@ function App() {
     setCalcString(`${calcData} ${dataText} `);
   }
 
+  // Clear all 
   function processClearType(){
     setDisplay('');
     setCalcString('');
+  }
+
+  // Delete single 
+  function processDeleteType(){
+    setDisplay(display.slice(0, -1));
+    setCalcString(calcData.slice(0, -1));
   }
 
 
