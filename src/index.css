@@ -7,7 +7,7 @@
 .calculator {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   width: 30%;
   margin: 0 auto;
   grid-gap: 0.1rem;
@@ -29,8 +29,15 @@
   font-size: 1.5rem;
 }
 
-.buttons .zero {
+/* .buttons .zero {
   grid-row: 5 / span 2;
+} */
+
+.display {
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
 }
 
 /* Footer  */
