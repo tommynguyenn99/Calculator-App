@@ -28,6 +28,7 @@ export const calculatorButtons = [
     text: "C",
     value: "Clear",
   },
+
   {
     type: BUTTON_TYPE.OPERATOR,
     className: "divide",
@@ -119,4 +120,16 @@ export const calculatorButtons = [
     text: 0,
     value: 0,
   },
+  {
+    type: 'memory',
+    className: 'ms',
+    text: 'MS',
+    value: 'Memory Save',
+},
+{
+  type: 'memory',
+  className: 'mc',
+  text: 'MC',
+  value: 'Memory Clear',
+},
 ];
