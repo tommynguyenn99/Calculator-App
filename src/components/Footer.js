@@ -1,6 +1,6 @@
-import { getYear } from "../utilities/dates";
+const defaultYear = new Date().getFullYear();
 
-function Footer({ copyright = getYear(), creator }) {
+function Footer({ copyright = defaultYear, creator }) {
   return (
     <footer>
       <p>

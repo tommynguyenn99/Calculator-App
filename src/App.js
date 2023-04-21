@@ -1,13 +1,7 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import Header from "./components/Header";
-import Display from "./components/Display";
-import Button from "./components/Button";
 import Footer from "./components/Footer";
-import {
-  BUTTON_TYPE,
-  OPERATIONS,
-  calculatorButtons,
-} from "./calculator-base-button-data.js";
+import { BUTTON_TYPE, OPERATIONS } from "./calculator-base-button-data.js";
 import "./index.css";
 import Calculator from "./components/Calculator";
 
@@ -18,8 +12,6 @@ const variables = {
 };
 
 const initialState = {
-  display: "",
-  calcData: "",
   // operatorSymbol is the operator that is displayed
   operatorSymbol: null,
   // operator is the operator that is used in the calculation
@@ -32,11 +24,14 @@ const initialState = {
   result: null,
 };
 
+// https://react.dev/docs/hooks-reference.html#usereducer
+// state: the current state
+// action: the action to be performed on the state (type and value and text)
 const reducer = (state, action) => {
   switch (action.type) {
     case BUTTON_TYPE.NUMBER: {
-      // if there is no operator, set value1 (left side of equation)
-      // if there is an operator, set value2 (right side of equation)
+      // if there is no operator, set value1 (left side of equation) if it exists, append to it, otherwise prepend a 0
+      // if there is an operator, set value2 (right side of equation) if it exists, append to it
       const newState = {
         ...state,
         value1: state.operator
@@ -49,7 +44,7 @@ const reducer = (state, action) => {
       return newState;
     }
     case BUTTON_TYPE.OPERATOR: {
-      // if there is no operator, set operator
+      // if there is no operator, set operator and operatorSymbol
       return {
         ...state,
         operatorSymbol: action.text,
@@ -57,16 +52,11 @@ const reducer = (state, action) => {
       };
     }
     case BUTTON_TYPE.CLEAR: {
-      return {
-        ...state,
-        value1: null,
-        value2: null,
-        operatorSymbol: null,
-        operator: null,
-        result: null,
-      };
+      // reset all values to initial state - that was defined above as a plain old javascript object
+      return initialState;
     }
     case BUTTON_TYPE.DELETE: {
+      // if all values are null or 0 (no values), return state aka do nothing
       if (
         !state.value1 &&
         !state.value2 &&
@@ -77,6 +67,7 @@ const reducer = (state, action) => {
       }
       return {
         ...state,
+        // if there is an operator, convert number to string, slice off the last character, and convert back to number
         value1: state.operator
           ? state.value1
           : +state.value1.toString().slice(0, -1),
@@ -95,6 +86,8 @@ const reducer = (state, action) => {
       ) {
         return state;
       }
+      // determine which operation to perform based on the operator in the state.
+      // we can add more operations as needed (e.g. square root, exponent, etc.)
       switch (state.operator) {
         case OPERATIONS.ADD: {
           return {
@@ -120,15 +113,13 @@ const reducer = (state, action) => {
 };
 
 function App() {
-  // // Display
-  // const [display, setDisplay] = useState("");
-  // // Calculate
-  // const [calcData, setCalcString] = useState("");
   // https://react.dev/reference/react/useReducer
   // https://react.dev/learn/extracting-state-logic-into-a-reducer
   // Step 1: Move from setting state to dispatching actions
   // Step 2: Write a reducer function
-  const [state, dispatch] = useReducer(reducer, initialState);
+  // calculatorState is the current state
+  // dispatch is the function that dispatches actions to the reducer
+  const [calculatorState, dispatch] = useReducer(reducer, initialState);
 
   // function handleBtnClick(btnValue, btnText, btnType) {
   //   // case switch based on btnType value
@@ -180,10 +171,13 @@ function App() {
   //   setCalcString(result.toString());
   // }
 
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#never_use_eval!
+  // don't use eval????????!!!!!!!!!!!! (it's dangerous)
+
   return (
     <div className="main-container">
       <Header className="calculator-header" title={variables.title} />
-      <Calculator state={state} dispatch={dispatch} />
+      <Calculator state={calculatorState} dispatch={dispatch} />
       {/* Footer */}
       <Footer
         className="footer"
